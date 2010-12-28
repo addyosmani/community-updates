@@ -11,7 +11,17 @@
 <h1>jQuery Core</h1>
 <p>The jQuery Bug Triage team have been hard at work this month and today we're happy to announce the release of jQuery 1.5 Alpha. Some of the updates in this release represent minor fixes to the jQuery core whilst others are important re-writes that form  part of jQuery 1.5 - our next major release due out in the first quarter of 2011.</p>
 <p><strong>What's changed?</strong></p>
-<p>The most paramount change in the Alpha release of jQuery is a complete re-write of $.ajax. [I've asked Julian to contribute a summary paragraph on the changes made here as he knows them best].</p>
+<p>You can find a complete list of the changes we've made under the section of this post titled 'Change Log'. The most paramount update in the Alpha release of jQuery is an exciting new re-write of $.ajax by Julian Aubourg which he explains in-depth below:</p>
+<p>&quot;The first change you'll see is $.ajax is probably the new signature: jQuery.ajax( [ url ] , [ options ]) which allows us to fetch a URL with default options easily. Of course, that's just the tip of the iceberg since jQuery.ajax has been rewritten from the ground-up.</p>
+<p>Every request type now supports timeout and abort. Native xhrs are now hidden from the developer and a new, jQuery specific object, with the same interface is provided as a replacement to callbacks and is returned by ajax or any other of its helper function (get, post, getScript, etc). This &quot;jXHR&quot; object provides the usual methods to set &amp; get headers or abort a request but also readyState, responseXML and responseText. Furthermore, it acts as a Promise and allows you to add success, error or complete callbacks even after the request has completed. For instance, it is now possible to write things like jQuery.getJSON( url ).error( errorCallback ).</p>
+<p>Internally, the new ajax features a pluggable architecture that makes it easy to define new dataTypes, how these dataTypes are to be converted from/to existing dataTypes and, eventually, provide a custom transport to support them. Creating ajax mockups or using browser-specific and other third-party means of networking won't involve walls of code anymore and these users/plugins additions will have access to the full power of jQuery.ajax right off the bat (parameter serialization, timeout, deferred callbacks, etc).</p>
+<p>Finally, some flexibility has been added to ajax options while new ones made their way in. For instance:</p><ul>
+<li>You can provide an array of callbacks for success, error or complete: non-functions are filtered and arrays are flattenned, so you can easily add a complete handler before all the others simply by doing options.complete = [ yourCompleteCallback , options.complete ]!</li>
+
+  <li>The new &quot;headers&quot; option makes it possible to set a map of request headers avoiding the hassle of providing a beforeSend callback.<br />
+  </li>
+</ul>
+<p>Great care has been taken to ensure existing unit tests passed and numerous others have been added.&quot;</p>
 <p><strong>How can I help?</strong></p>
 <p>As always we would like to invite the community to help us test these changes so that we can identify and correct any persisting issues as soon as possible.</p>
 <p>To start, try dropping the below version of jQuery 1.5 Alpha (jQuery-GIT) into a live application that you’re running. If you hit an exception or some weirdness occurs immediately login to the bug tracker and <a href="http://bugs.jquery.com/">file a bug</a>. <strong>Be sure to mention that you hit the bug in jQuery-GIT.</strong></p>
@@ -37,7 +47,7 @@
   <li><a href="http://bugs.jquery.com/ticket/7717">#7717</a> and <a href="http://bugs.jquery.com/ticket/7165">#7165</a> .clone(true) does not clone data correctly. For performance and reliability reasons we have decided to only copy the first level of the data object. That is also consistent with the behavior of $().data(obj) which shallow-extends the element's existing data object with obj.</li>
   <li><a href="http://bugs.jquery.com/ticket/4386">#4386</a> <a href="http://bugs.jquery.com/ticket/5566">#5566</a>, <a href="http://bugs.jquery.com/ticket/6997">#6997</a> Make sure IE clones body elements correctly. Previously, iFrame body clone events in IE experienced issues before and after clone events. This has been corrected.<br />
   </li>
-  <li><a href="http://bugs.jquery.com/ticket/7195"><strong>#7195</strong></a><strong> Rewrite of the Ajax module by Julian Aubourg. This is the most significant change in this release and brings a number of performance improvemenets to $.ajax. Further details can be found here: <a href="http://oksoclap.com/6Y26bm1ZsB">http://oksoclap.com/6Y26bm1ZsB</a></strong><a href="http://oksoclap.com/6Y26bm1ZsB"></a><br />
+  <li><a href="http://bugs.jquery.com/ticket/7195">#7195</a> Rewrite of the Ajax module by Julian Aubourg. This is the most significant change in this release and brings a number of performance improvemenets to $.ajax. Further details can be found here: <a href="http://oksoclap.com/6Y26bm1ZsB">http://oksoclap.com/6Y26bm1ZsB</a><br />
   </li>
   <li><a href="http://bugs.jquery.com/ticket/7413">#7413</a> backed out browser inconsistencies with return of jQuery.isEmptyObject</li>
   <li><a href="http://bugs.jquery.com/ticket/6897">#6897</a>    jQuery.props is in support.js but belongs in attributes.js. This has been moved.<br />
