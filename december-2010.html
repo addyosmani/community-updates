@@ -8,11 +8,13 @@
 <body>
 <p>Welcome to the December jQuery Community Update. We hope you had an enjoyable Christmas break with your families and would like to wish everyone in the community a happy new year in advance!</p>
 <p>In today's post we'll be presenting important updates from both jQuery Core and jQuery UI which we would appreciate your comments and feedback on.</p>
-<h1>jQuery Core</h1>
+<h1>jQuery 1.5 Alpha</h1>
 <p>The jQuery Bug Triage team have been hard at work this month and today we're happy to announce the release of jQuery 1.5 Alpha. Some of the updates in this release represent minor fixes to the jQuery core whilst others are important re-writes that form  part of jQuery 1.5 - our next major release due out in the first quarter of 2011.</p>
 <p><strong>What's changed?</strong></p>
-<p>You can find a complete list of the changes we've made under the section of this post titled 'Change Log'. The most paramount update in the Alpha release of jQuery is an exciting new re-write of $.ajax by Julian Aubourg which he explains in-depth below:</p>
-<p>&quot;The first change you'll see is $.ajax is probably the new signature: jQuery.ajax( [ url ] , [ options ]) which allows us to fetch a URL with default options easily. Of course, that's just the tip of the iceberg since jQuery.ajax has been rewritten from the ground-up.</p>
+<p>You can find a complete list of the changes we've made under the section of this post titled 'Change Log'. The paramount update in the Alpha release of jQuery is an exciting new re-write of $.ajax by Julian Aubourg which he explains in-depth below:</p>
+
+<blockquote>
+<p>The first change you'll see is $.ajax is probably the new signature: jQuery.ajax( [ url ] , [ options ]) which allows us to fetch a URL with default options easily. Of course, that's just the tip of the iceberg since jQuery.ajax has been rewritten from the ground-up.</p>
 <p>Every request type now supports timeout and abort. Native xhrs are now hidden from the developer and a new, jQuery specific object, with the same interface is provided as a replacement to callbacks and is returned by ajax or any other of its helper function (get, post, getScript, etc). This &quot;jXHR&quot; object provides the usual methods to set &amp; get headers or abort a request but also readyState, responseXML and responseText. Furthermore, it acts as a Promise and allows you to add success, error or complete callbacks even after the request has completed. For instance, it is now possible to write things like jQuery.getJSON( url ).error( errorCallback ).</p>
 <p>Internally, the new ajax features a pluggable architecture that makes it easy to define new dataTypes, how these dataTypes are to be converted from/to existing dataTypes and, eventually, provide a custom transport to support them. Creating ajax mockups or using browser-specific and other third-party means of networking won't involve walls of code anymore and these users/plugins additions will have access to the full power of jQuery.ajax right off the bat (parameter serialization, timeout, deferred callbacks, etc).</p>
 <p>Finally, some flexibility has been added to ajax options while new ones made their way in. For instance:</p><ul>
@@ -21,10 +23,12 @@
   <li>The new &quot;headers&quot; option makes it possible to set a map of request headers avoiding the hassle of providing a beforeSend callback.<br />
   </li>
 </ul>
-<p>Great care has been taken to ensure existing unit tests passed and numerous others have been added.&quot;</p>
+<p>Great care has been taken to ensure existing unit tests passed and numerous others have been added.</p>
+</blockquote>
+
 <p><strong>How can I help?</strong></p>
 <p>As always we would like to invite the community to help us test these changes so that we can identify and correct any persisting issues as soon as possible.</p>
-<p>To start, try dropping the below version of jQuery 1.5 Alpha (jQuery-GIT) into a live application that you’re running. If you hit an exception or some weirdness occurs immediately login to the bug tracker and <a href="http://bugs.jquery.com/">file a bug</a>. <strong>Be sure to mention that you hit the bug in jQuery-GIT.</strong></p>
+<p>To start, try dropping the below version of jQuery 1.5 Alpha (jQuery-GIT) into a live application that you’re running. If you hit an exception or some weirdness occurs immediately login to the bug tracker and <a href="http://bugs.jquery.com/">file a bug</a>. <strong>Be sure to mention that you hit the bug in jQuery-GIT.</strong></p>
 <ol>
   <li>Include jQuery-GIT in your project using the URL: <a href="http://code.jquery.com/jquery-git.js">http://code.jquery.com/jquery-git.js</a></li>
   <li>Select jQuery-GIT as your jQuery version of choice inside jsFiddle.net</li>
@@ -33,55 +37,47 @@
 <p><strong>Change Log</strong></p>
 <p>Fixed:</p>
 <ol>
-  <li><a href="http://bugs.jquery.com/ticket/7102">#7102</a> jQuery now registers itself as a CommonJS async module. This allows jQuery to participate in browser module loading with compatible loaders such as RequireJS and Yabble.</li>
-  <li><a href="http://bugs.jquery.com/ticket/6842">#6842</a> Decreased the number of expando collissions possible when using noConflict(). The expando string now uses a random number and we also add in the jQuery version number to instantly differentiate separate versions of jQuery.</li>
-  <li><a href="http://bugs.jquery.com/ticket/7847">#7847</a> $.get and $.post were internally quite WET in nature. These are now significantly more DRY</li>
-  <li><a href="http://bugs.jquery.com/ticket/7793">#7793</a> When a native browser event is bubbling up the DOM, make sure that the correct isDefaultPrevented value is reflected by jQuery's Event object</li>
-  <li><a href="http://bugs.jquery.com/ticket/6779">#6779</a> No longer cache non-html strings in buildFragment to avoid possible collision with the names of Object methods like toString. This change also helps make our unit tests 0.5-8% faster.</li>
-  <li><a href="http://bugs.jquery.com/ticket/6481">#6481</a>
-    $.param should treat empty arrays/objects like empty strings. This has now been corrected.</li>
-  <li><a href="http://bugs.jquery.com/ticket/7817">#7817</a> No longer use for-in loops on arrays - this fixes an issue where xhr.js was breaking if array.prototype methods were being added.</li>
-  <li><a href="http://bugs.jquery.com/ticket/7165">#7165</a> Updated the cloneCopy event so that it does not create superfluous data objects when cloning elements. Exposes a new method, $.hasData. </li>
-  <li><a href="http://bugs.jquery.com/ticket/7809">#7809</a> Use a for loop rather than for/in loop when copying events so that code will work with an augmented Array.prototype.</li>
-  <li><a href="http://bugs.jquery.com/ticket/7397">#7397</a> fadeIn not correctly working with inline elements</li>
-  <li><a href="http://bugs.jquery.com/ticket/7717">#7717</a> and <a href="http://bugs.jquery.com/ticket/7165">#7165</a> .clone(true) does not clone data correctly. For performance and reliability reasons we have decided to only copy the first level of the data object. That is also consistent with the behavior of $().data(obj) which shallow-extends the element's existing data object with obj.</li>
-  <li><a href="http://bugs.jquery.com/ticket/4386">#4386</a> <a href="http://bugs.jquery.com/ticket/5566">#5566</a>, <a href="http://bugs.jquery.com/ticket/6997">#6997</a> Make sure IE clones body elements correctly. Previously, iFrame body clone events in IE experienced issues before and after clone events. This has been corrected.<br />
-  </li>
-  <li><a href="http://bugs.jquery.com/ticket/7195">#7195</a> Rewrite of the Ajax module by Julian Aubourg. This is the most significant change in this release and brings a number of performance improvemenets to $.ajax. Further details can be found here: <a href="http://oksoclap.com/6Y26bm1ZsB">http://oksoclap.com/6Y26bm1ZsB</a><br />
-  </li>
-  <li><a href="http://bugs.jquery.com/ticket/7413">#7413</a> backed out browser inconsistencies with return of jQuery.isEmptyObject</li>
-  <li><a href="http://bugs.jquery.com/ticket/6897">#6897</a>    jQuery.props is in support.js but belongs in attributes.js. This has been moved.<br />
-  </li>
-  <li><a href="http://bugs.jquery.com/ticket/6398">#6398</a> Custom 'submit' event on objects in IE added and now supported in 1.5 Alpha</li>
-  <li><a href="http://bugs.jquery.com/ticket/7578">#7578</a>    $.getScript() (ajax 'script' dataType) regression on cache control. </li>
-  <li><a href="http://bugs.jquery.com/ticket/5476">#5476</a> prevents get(-1) from creating a new jQuery object.</li>
-  <li><a href="http://bugs.jquery.com/ticket/7673">#7673</a>    hasClass, removeClass didn't work in IE if the attribute contained \R character. </li>
-  <li><a href="http://bugs.jquery.com/ticket/7524">#7524</a> Calling $.fn.data without arguments on a non-DOM element in 1.4.4 breaking</li>
-  <li><a href="http://bugs.jquery.com/ticket/6242">#6242</a> Fix memory leaks in IE caused by the custom abort function of $.ajax </li>
-  <li><a href="http://bugs.jquery.com/ticket/7673">#7673</a> Handle carriage return characters in className property</li>
-  <li><a href="http://bugs.jquery.com/ticket/6911">#6911</a> Prevent disabled elements in liveHandler <br />
-  </li>
-  <li><a href="http://bugs.jquery.com/ticket/6398">#6398</a> Make sure custom events named &quot;submit&quot; can be bound to non DOM elements in IE too</li>
-  <li><a href="http://bugs.jquery.com/ticket/7578">#7578</a> Set cache to false as default for script or JSON requests. </li>
-  <li><a href="http://bugs.jquery.com/ticket/5476">#5476</a> Improve performance of get() for negative indices. <br />
-  </li>
-  <li><a href="http://bugs.jquery.com/ticket/7202">#7202</a>, <a href="http://bugs.jquery.com/ticket/7451">#7451</a>, <a href="http://bugs.jquery.com/ticket/7500">#7500</a> Make sure attr() works on non DOM element nodes. . <br />
-  </li>
-  <li> <a href="http://bugs.jquery.com/ticket/7531">#7531</a> $.post(document.location) didn't work since 1.4.3 in both FireFox and Chrome. We now coerce URL to string before calling replace since replace is also a method of a Location object. <br />
-  </li>
+  <li>Rewrite of the Ajax module by Julian Aubourg. This is the most significant change in this release and brings a number of performance improvemenets to $.ajax. Further details can be found here: <a href="http://oksoclap.com/6Y26bm1ZsB">http://oksoclap.com/6Y26bm1ZsB</a> <a href="http://bugs.jquery.com/ticket/7195">#7195</a></li>
+  <li>jQuery now registers itself as a CommonJS async module. This allows jQuery to participate in browser module loading with compatible loaders such as RequireJS and Yabble. <a href="http://bugs.jquery.com/ticket/7102">#7102</a></li>
+  <li>Decreased the number of expando collissions possible when using noConflict(). The expando string now uses a random number and we also add in the jQuery version number to instantly differentiate separate versions of jQuery. <a href="http://bugs.jquery.com/ticket/6842">#6842</a></li>
+  <li>$.get and $.post were internally quite WET in nature. These are now significantly more DRY <a href="http://bugs.jquery.com/ticket/7847">#7847</a></li>
+  <li>When a native browser event is bubbling up the DOM, make sure that the correct isDefaultPrevented value is reflected by jQuery's Event object <a href="http://bugs.jquery.com/ticket/7793">#7793</a></li>
+  <li>No longer cache non-html strings in buildFragment to avoid possible collision with the names of Object methods like toString. This change also helps make our unit tests 0.5-8% faster. <a href="http://bugs.jquery.com/ticket/6779">#6779</a></li>
+  <li>$.param should treat empty arrays/objects like empty strings. This has now been corrected. <a href="http://bugs.jquery.com/ticket/6481">#6481</a></li>
+  <li>No longer use for-in loops on arrays - this fixes an issue where xhr.js was breaking if array.prototype methods were being added. <a href="http://bugs.jquery.com/ticket/7817">#7817</a></li>
+  <li>Updated the cloneCopy event so that it does not create superfluous data objects when cloning elements. Exposes a new method, $.hasData.  <a href="http://bugs.jquery.com/ticket/7165">#7165</a></li>
+  <li>Use a for loop rather than for/in loop when copying events so that code will work with an augmented Array.prototype. <a href="http://bugs.jquery.com/ticket/7809">#7809</a></li>
+  <li>fadeIn not correctly working with inline elements <a href="http://bugs.jquery.com/ticket/7397">#7397</a></li>
+  <li>.clone(true) does not clone data correctly. For performance and reliability reasons we have decided to only copy the first level of the data object. That is also consistent with the behavior of $().data(obj) which shallow-extends the element's existing data object with obj. <a href="http://bugs.jquery.com/ticket/7717">#7717</a> and <a href="http://bugs.jquery.com/ticket/7165">#7165</a></li>
+  <li>Make sure IE clones body elements correctly. Previously, iFrame body clone events in IE experienced issues before and after clone events. This has been corrected. <a href="http://bugs.jquery.com/ticket/4386">#4386</a> <a href="http://bugs.jquery.com/ticket/5566">#5566</a>, <a href="http://bugs.jquery.com/ticket/6997">#6997</a></li>
+  <li>backed out browser inconsistencies with return of jQuery.isEmptyObject <a href="http://bugs.jquery.com/ticket/7413">#7413</a></li>
+  <li>jQuery.props is in support.js but belongs in attributes.js. This has been moved. <a href="http://bugs.jquery.com/ticket/6897">#6897</a></li>
+  <li>Custom 'submit' event on objects in IE added and now supported in 1.5 Alpha <a href="http://bugs.jquery.com/ticket/6398">#6398</a></li>
+  <li>$.getScript() (ajax 'script' dataType) regression on cache control.  <a href="http://bugs.jquery.com/ticket/7578">#7578</a></li>
+  <li>prevents get(-1) from creating a new jQuery object. <a href="http://bugs.jquery.com/ticket/5476">#5476</a></li>
+  <li>hasClass, removeClass didn't work in IE if the attribute contained \R character.  <a href="http://bugs.jquery.com/ticket/7673">#7673</a></li>
+  <li>Calling $.fn.data without arguments on a non-DOM element in 1.4.4 breaking <a href="http://bugs.jquery.com/ticket/7524">#7524</a></li>
+  <li>Fix memory leaks in IE caused by the custom abort function of $.ajax  <a href="http://bugs.jquery.com/ticket/6242">#6242</a></li>
+  <li>Handle carriage return characters in className property <a href="http://bugs.jquery.com/ticket/7673">#7673</a></li>
+  <li>Prevent disabled elements in liveHandler. <a href="http://bugs.jquery.com/ticket/6911">#6911</a></li>
+  <li>Make sure custom events named &quot;submit&quot; can be bound to non DOM elements in IE too <a href="http://bugs.jquery.com/ticket/6398">#6398</a></li>
+  <li>Set cache to false as default for script or JSON requests.  <a href="http://bugs.jquery.com/ticket/7578">#7578</a></li>
+  <li>Improve performance of get() for negative indices. <a href="http://bugs.jquery.com/ticket/5476">#5476</a> </li>
+  <li>Make sure attr() works on non DOM element nodes. <a href="http://bugs.jquery.com/ticket/7202">#7202</a>, <a href="http://bugs.jquery.com/ticket/7451">#7451</a>, <a href="http://bugs.jquery.com/ticket/7500">#7500</a> </li>
+  <li>$.post(document.location) didn't work since 1.4.3 in both FireFox and Chrome. We now coerce URL to string before calling replace since replace is also a method of a Location object. <a href="http://bugs.jquery.com/ticket/7531">#7531</a></li>
 </ol>
-<h1>jQuery UI</h1>
+<h1>jQuery UI 1.8.7 and Spinner, Menu, &amp; Tooltip</h1>
 <p>The jQuery UI team have also been working away on new updates that are now available for testing and would like to notify the community of the following announcements:</p>
 <p>jQuery UI 1.8.7 was released since our last community update. This brought support for jQuery 1.4.4 but also provided noteable updates to Button, ProgressBar and DatePicker. For the full details of this release, please see the release notes here for more information: <a href="http://blog.jqueryui.com/2010/12/jquery-ui-1-8-7/">http://blog.jqueryui.com/2010/12/jquery-ui-1-8-7/</a></p>
 <p>Secondly, the latest version of jQuery UI available on GitHub just landed three new plugins which we would like to invite the community to test in their live projects. These are Spinner, Menu and ToolTip and we would like to thank Jörn Zaefferer for his in landing these.</p>
 <p>If you are testing any of the above and would like to submit bug tickets to jQuery UI, please see the section titled 'Finding and Fixing Bugs' here for more information: <a href="http://jqueryui.com/development">http://jqueryui.com/development</a>.</p>
-<h1>jQuery Podcast</h1>
+<h1>Wijmo on the jQuery Podcast</h1>
 <p>For fans of the Official jQuery Podcast, we would like to remind you that Episode 40 is now available for streaming or download. In this episode, we talk to Chris Bannon of ComponentOne about the useful new jQuery UI library called Wijmo - a collection of widgets built off and which extend jQuery UI. To get the episode, head on over to: <a href="http://podcast.jquery.com/">http://podcast.jquery.com/</a>.</p>
 <h1>Donations</h1>
 <p>Has jQuery helped make your development life a little easier? As you may know, jQuery is an open-source project that relies on the time and efforts of our valued volunteers and community members. The project is financed entirely by donations by the community and these help us to continue offering jQuery for free. </p>
 <p>If you've found jQuery useful, we would like to humbly ask that you consider making a small donation to help (even $10 goes a long way). Remember that as the jQuery project is a part of the Software Freedom Conservancy, any domations you make are fully tax-deductible.</p>
 <p>Interested? For more information on helping out with a donation, please see <a href="http://jquery.org/donate">http://jquery.org/donate</a></p>
 <p>&nbsp;</p>
-<p>That's it for this update!. Until next time, thanks for reading and please do feel free to test out the latest updates to both jQuery core and jQuery UI in your live projects. We look forward to reading your feedback.</p>
+<p>That's it for this update! Until next time, thanks for reading and please do feel free to test out the latest updates to both jQuery core and jQuery UI in your live projects. We look forward to reading your feedback.</p>
 </body>
-</html>
+</html>​
