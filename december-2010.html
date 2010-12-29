@@ -1,74 +1,66 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Community Update</title>
-</head>
+<img title="JQuery" src="http://blog.jquery.com/wp-content/uploads/2010/10/jquerycomm.jpg" alt="" width="580" height="100" />
 
-<body>
-<p>Welcome to the December jQuery Community Update. We hope you had an enjoyable break with your families and would like to wish everyone in the community a happy new year!</p>
-<p>In today's post we'll be presenting updates on both jQuery Core and jQuery UI. We would appreciate your comments and feedback on them!</p>
+Welcome to the December jQuery Community Update. We hope you had an enjoyable break with your families and would like to wish everyone in the community a happy new year!
+
+In today's post we'll be presenting updates on both jQuery Core and jQuery UI. We would appreciate your comments and feedback on them!
 <h1>The Road to jQuery 1.5</h1>
-<p>The jQuery team has been hard at work this month preparing for a jQuery 1.5 release. Some of updates in this release represent our continued commitment to stability and consistency through bug fixes and browser behavior normalization, while others are important rewrites that will improve the performance, maintainbility, and versatility of the library.</p>
-
+The jQuery team has been hard at work this month preparing for a jQuery 1.5 release. Some of updates in this release represent our continued commitment to stability and consistency through bug fixes and browser behavior normalization, while others are important rewrites that will improve the performance, maintainbility, and versatility of the library.
 <h2>What's changed?</h2>
-<p>You can find a complete list of the changes we've made under the section of this post titled 'Change Log'. The largest update currently available is our new overhauled $.ajax component, which is explained below by its author, Julian Aubourg:</p>
+You can find a complete list of the changes we've made under the section of this post titled 'Change Log'. The largest update currently available is our new overhauled $.ajax component, which is explained below by its author, Julian Aubourg:
+<blockquote>The first change you'll see in the ajax component is probably the new signature: <code>jQuery.ajax( [ url ] , [ options ])</code>. This allows us to fetch a URL with default options more easily. Of course, that's just the tip of the iceberg since the entire thing has been rewritten from the ground-up to provide many new features.
 
-<blockquote>
-<p>The first change you'll see in the ajax component is probably the new signature: <code>jQuery.ajax( [ url ] , [ options ])</code>. This allows us to fetch a URL with default options more easily. Of course, that's just the tip of the iceberg since the entire thing has been rewritten from the ground-up to provide many new features.</p>
-<p>Every request type now supports timeout and abort. Native XHR objects are now hidden from the developer and a new, jQuery-specific object with the same basic interface is provided as a replacement. This &quot;jXHR&quot; object provides the usual properties and methods to set &amp; get headers, abort requests, and view readyState, responseXML, and responseText—but unlike a native XHR object, it also acts as a <a href="http://en.wikipedia.org/wiki/Promise_%28programming%29">Promise</a>. Promises allow you to add success, error or complete callbacks even <strong>after</strong> a request has completed; for instance, it is now possible to write things like <code>jQuery.getJSON( url ).error( errorCallback )</code>, and it will always work, regardless of the state of the original request.</p>
-<p>Internally, the new ajax component features a pluggable architecture that makes it easy to define new custom dataTypes and transports. Custom dataTypes allow you to provide a consistent response object to your application code no matter the original data format, and custom transports allow you to do things like fake ajax requests for testing, use browser-specific network objects (like XDomainRequest), or use entirely different mechanisms for performing remote calls (like iframe or postMessage) without needing to write walls of code. Best of all, any such addition has access to the full power of jQuery.ajax right off the bat (parameter serialization, timeout, deferred callbacks, etc), and is exposed to application code using the same familiar $.ajax API that you already know.</p>
-<p>Finally, some flexibility has been added to existing ajax options, and new ones have been added. For instance:</p><ul>
-<li>You can provide an array of callbacks for success, error or complete. Non-functions are filtered and arrays are flattened, so you can easily add a complete handler before all the others simply by doing <code>options.complete = [ yourCompleteCallback , options.complete ]</code>!</li>
+Every request type now supports timeout and abort. Native XHR objects are now hidden from the developer and a new, jQuery-specific object with the same basic interface is provided as a replacement. This "jXHR" object provides the usual properties and methods to set &amp; get headers, abort requests, and view readyState, responseXML, and responseText—but unlike a native XHR object, it also acts as a <a href="http://en.wikipedia.org/wiki/Promise_%28programming%29">Promise</a>. Promises allow you to add success, error or complete callbacks even <strong>after</strong> a request has completed; for instance, it is now possible to write things like <code>jQuery.getJSON( url ).error( errorCallback )</code>, and it will always work, regardless of the state of the original request.
 
-  <li>The new &quot;headers&quot; option makes it possible to set a map of request headers, avoiding the hassle of requiring a beforeSend callback just to set headers.
-  </li>
+Internally, the new ajax component features a pluggable architecture that makes it easy to define new custom dataTypes and transports. Custom dataTypes allow you to provide a consistent response object to your application code no matter the original data format, and custom transports allow you to do things like fake ajax requests for testing, use browser-specific network objects (like XDomainRequest), or use entirely different mechanisms for performing remote calls (like iframe or postMessage) without needing to write walls of code. Best of all, any such addition has access to the full power of jQuery.ajax right off the bat (parameter serialization, timeout, deferred callbacks, etc), and is exposed to application code using the same familiar $.ajax API that you already know.
+
+Finally, some flexibility has been added to existing ajax options, and new ones have been added. For instance:
+<ul>
+	<li>You can provide an array of callbacks for success, error or complete. Non-functions are filtered and arrays are flattened, so you can easily add a complete handler before all the others simply by doing <code>options.complete = [ yourCompleteCallback , options.complete ]</code>!</li>
+	<li>The new "headers" option makes it possible to set a map of request headers, avoiding the hassle of requiring a beforeSend callback just to set headers.</li>
 </ul>
-<p>Great care has been taken to ensure existing unit tests passed, and numerous other tests have been added to help ensure everything functions as expected and doesn’t break existing code.</p>
-</blockquote>
+Great care has been taken to ensure existing unit tests passed, and numerous other tests have been added to help ensure everything functions as expected and doesn’t break existing code.</blockquote>
+<strong>How can I help?</strong>
 
-<p><strong>How can I help?</strong></p>
-<p>As always, we would like to invite the community to contribute new patches or help us test changes so that we can identify and correct any issues as soon as possible.</p>
-<p>To perform testing, just try dropping the <a href="http://code.jquery.com/jquery-git.js">development version of jQuery (jQuery-GIT)</a> into a copy of your existing application. If you hit an exception or some weirdness occurs, log in to the bug tracker and <a href="http://bugs.jquery.com/">file a bug</a>. <strong>Be sure to set the version drop-down to “git”.</strong> You can also test code on jsFiddle by selecting “jQuery 0 GIT” from the drop-down menu in the sidebar.</p>
-<p>To contribute patches, Rick Waldron has written an excellent <a href="http://weblog.bocoup.com/javascript-jquery-bug-fixing-guide">guide to jQuery bug fixing</a> that walks through getting started with git, building and testing jQuery, and finding new bugs to work on. If you plan on submitting patches, you should also join the #jquery-dev channel on Freenode, which is where most discussions about jQuery development occur.</p>
+As always, we would like to invite the community to contribute new patches or help us test changes so that we can identify and correct any issues as soon as possible.
 
+To perform testing, just try dropping the <a href="http://code.jquery.com/jquery-git.js">development version of jQuery (jQuery-GIT)</a> into a copy of your existing application. If you hit an exception or some weirdness occurs, log in to the bug tracker and <a href="http://bugs.jquery.com/">file a bug</a>. <strong>Be sure to set the version drop-down to “git”.</strong> You can also test code on jsFiddle by selecting “jQuery 0 GIT” from the drop-down menu in the sidebar.
+
+To contribute patches, Rick Waldron has written an excellent <a href="http://weblog.bocoup.com/javascript-jquery-bug-fixing-guide">guide to jQuery bug fixing</a> that walks through getting started with git, building and testing jQuery, and finding new bugs to work on. If you plan on submitting patches, you should also join the #jquery-dev channel on Freenode, which is where most discussions about jQuery development occur.
 <h2>Change Log</h2>
-<ol>
-  <li>Rewrite of the Ajax module by Julian Aubourg. This is the most significant change in this release and brings a number of performance, stability, and feature improvements to $.ajax. More information can be found above. <a href="http://bugs.jquery.com/ticket/7195">#7195</a></li>
-  <li>jQuery now registers itself as a CommonJS async module. This allows jQuery to participate in browser module loading with compatible loaders such as RequireJS and Yabble. <a href="http://bugs.jquery.com/ticket/7102">#7102</a></li>
-  <li>Removed the possibility of expando collisions when using noConflict() (V8 is fast!). The expando string now uses a random number + jQuery version to differentiate between instances of jQuery instead of millisecond clock time. <a href="http://bugs.jquery.com/ticket/6842">#6842</a></li>
-  <li>Deduplicated code in $.get and $.post. <a href="http://bugs.jquery.com/ticket/7847">#7847</a></li>
-  <li>When a native browser event is bubbling up the DOM, make sure that the correct isDefaultPrevented value is reflected by jQuery's Event object. <a href="http://bugs.jquery.com/ticket/7793">#7793</a></li>
-  <li>No longer cache non-html strings in buildFragment to avoid possible collision with the names of Object methods like toString. Testing shows this may also provide modest performance improvements. <a href="http://bugs.jquery.com/ticket/6779">#6779</a></li>
-  <li>Updated cloneCopyEvent so that it does not create superfluous data objects when cloning elements. Exposes a new method, $.hasData, for determining whether or not an object has any data. <a href="http://bugs.jquery.com/ticket/7165">#7165</a></li>
-  <li>Use a for loop rather than for/in loop when copying events so that code will work with an augmented Array.prototype. <a href="http://bugs.jquery.com/ticket/7809">#7809</a>, <a href="http://bugs.jquery.com/ticket/7817">#7817</a></li>
-  <li>Fixed fadeIn not working properly with inline elements. <a href="http://bugs.jquery.com/ticket/7397">#7397</a></li>
-  <li>Rewrote IE’s clone function to function properly in all known cases. <a href="http://bugs.jquery.com/ticket/4386">#4386</a>, <a href="http://bugs.jquery.com/ticket/5566">#5566</a>, <a href="http://bugs.jquery.com/ticket/6997">#6997</a></li>
-  <li>Fixed IE breaking when dispatching a 'submit' event on plain JS objects. <a href="http://bugs.jquery.com/ticket/6398">#6398</a></li>
-  <li>Fixed a regression in 1.4 that caused cache control to be set incorrectly for script transport. <a href="http://bugs.jquery.com/ticket/7578">#7578</a></li>
-  <li>Improve performance of get() for negative indices. <a href="http://bugs.jquery.com/ticket/5476">#5476</a></li>
-  <li>hasClass, removeClass didn't work in IE if the attribute contained a carriage return (\r) character. <a href="http://bugs.jquery.com/ticket/7673">#7673</a></li>
-  <li>Fix a regresion in 1.4.4 where calling $.fn.data without arguments breaks on non-DOM elements. <a href="http://bugs.jquery.com/ticket/7524">#7524</a></li>
-  <li>Fix memory leaks in IE caused by the custom abort function of $.ajax. <a href="http://bugs.jquery.com/ticket/6242">#6242</a></li>
-  <li>Prevent live events from firing on disabled elements in IE. <a href="http://bugs.jquery.com/ticket/6911">#6911</a></li>
-  <li>Fixed a regression in 1.4.3 that caused sending a Location object to $.ajax to no longer work. <a href="http://bugs.jquery.com/ticket/7531">#7531</a></li>
-</ol>
 
+<ul>
+	<li>1.Rewrite of the Ajax module by Julian Aubourg. This is the most significant change in this release and brings a number of performance, stability, and feature improvements to $.ajax. More information can be found above. <a href="http://bugs.jquery.com/ticket/7195">#7195</a></li>
+	<li>2.jQuery now registers itself as a CommonJS async module. This allows jQuery to participate in browser module loading with compatible loaders such as RequireJS and Yabble. <a href="http://bugs.jquery.com/ticket/7102">#7102</a></li>
+	<li>3.Removed the possibility of expando collisions when using noConflict() (V8 is fast!). The expando string now uses a random number + jQuery version to differentiate between instances of jQuery instead of millisecond clock time. <a href="http://bugs.jquery.com/ticket/6842">#6842</a></li>
+	<li>4.Deduplicated code in $.get and $.post. <a href="http://bugs.jquery.com/ticket/7847">#7847</a></li>
+	<li>5.When a native browser event is bubbling up the DOM, make sure that the correct isDefaultPrevented value is reflected by jQuery's Event object. <a href="http://bugs.jquery.com/ticket/7793">#7793</a></li>
+	<li>6.No longer cache non-html strings in buildFragment to avoid possible collision with the names of Object methods like toString. Testing shows this may also provide modest performance improvements. <a href="http://bugs.jquery.com/ticket/6779">#6779</a></li>
+	<li>7.Updated cloneCopyEvent so that it does not create superfluous data objects when cloning elements. Exposes a new method, $.hasData, for determining whether or not an object has any data. <a href="http://bugs.jquery.com/ticket/7165">#7165</a></li>
+	<li>8.Use a for loop rather than for/in loop when copying events so that code will work with an augmented Array.prototype. <a href="http://bugs.jquery.com/ticket/7809">#7809</a>, <a href="http://bugs.jquery.com/ticket/7817">#7817</a></li>
+	<li>9.Fixed fadeIn not working properly with inline elements. <a href="http://bugs.jquery.com/ticket/7397">#7397</a></li>
+	<li>10.Rewrote IE’s clone function to function properly in all known cases. <a href="http://bugs.jquery.com/ticket/4386">#4386</a>, <a href="http://bugs.jquery.com/ticket/5566">#5566</a>, <a href="http://bugs.jquery.com/ticket/6997">#6997</a></li>
+	<li>11.Fixed IE breaking when dispatching a 'submit' event on plain JS objects. <a href="http://bugs.jquery.com/ticket/6398">#6398</a></li>
+	<li>12.Fixed a regression in 1.4 that caused cache control to be set incorrectly for script transport. <a href="http://bugs.jquery.com/ticket/7578">#7578</a></li>
+	<li>13.Improve performance of get() for negative indices. <a href="http://bugs.jquery.com/ticket/5476">#5476</a></li>
+	<li>14.hasClass, removeClass didn't work in IE if the attribute contained a carriage return (\r) character. <a href="http://bugs.jquery.com/ticket/7673">#7673</a></li>
+	<li>15.Fix a regresion in 1.4.4 where calling $.fn.data without arguments breaks on non-DOM elements. <a href="http://bugs.jquery.com/ticket/7524">#7524</a></li>
+	<li>16.Fix memory leaks in IE caused by the custom abort function of $.ajax. <a href="http://bugs.jquery.com/ticket/6242">#6242</a></li>
+	<li>17.Prevent live events from firing on disabled elements in IE. <a href="http://bugs.jquery.com/ticket/6911">#6911</a></li>
+	<li>18.Fixed a regression in 1.4.3 that caused sending a Location object to $.ajax to no longer work. <a href="http://bugs.jquery.com/ticket/7531">#7531</a></li>
+</ul>
 <h1>jQuery UI 1.8.7 and Spinner, Menu, &amp; Tooltip</h1>
-<p>The jQuery UI team have also been busily working away on new stuff. Here are some updates from them:</p>
-<p>jQuery UI 1.8.7 was released since our last community update. This brought support for jQuery 1.4.4 but also provided noteable updates to Button, ProgressBar and DatePicker. For the full details of this release, please read the <a href="http://blog.jqueryui.com/2010/12/jquery-ui-1-8-7/">jQuery UI 1.8.7 release notes</a>.</p>
-<p>Also, three new plugins just landed on the <a href="http://github.com/jquery/jquery-ui">jQuery UI master branch</a>, courtesy of Jörn Zaefferer: <a href="http://blog.jqueryui.com/2010/11/jquery-ui-1-9-milestone-3-spinner/">Spinner</a>, <a href="http://blog.jqueryui.com/2010/06/jquery-ui-19m2-menu/">Menu</a> and <a href="http://blog.jqueryui.com/2010/05/jquery-ui-19m1-tooltip/">Tooltip</a>. These three widgets have been in development for some time and each has had their own milestone release. For more information on these new widgets, you can read about them on their dedicated release pages above!.We would like to invite the community to test and provide feedback on these new widgets and if you discover any bugs or issues that you need to report, instructions for doing so can be found at the <a href="http://jqueryui.com/development">jQuery UI Development Center</a>.</p>
+The jQuery UI team have also been busily working away on new stuff. Here are some updates from them:
 
+jQuery UI 1.8.7 was released since our last community update. This brought support for jQuery 1.4.4 but also provided noteable updates to Button, ProgressBar and DatePicker. For the full details of this release, please read the <a href="http://blog.jqueryui.com/2010/12/jquery-ui-1-8-7/">jQuery UI 1.8.7 release notes</a>.
+
+Also, three new plugins just landed on the <a href="http://github.com/jquery/jquery-ui">jQuery UI master branch</a>, courtesy of Jörn Zaefferer: <a href="http://blog.jqueryui.com/2010/11/jquery-ui-1-9-milestone-3-spinner/">Spinner</a>, <a href="http://blog.jqueryui.com/2010/06/jquery-ui-19m2-menu/">Menu</a> and <a href="http://blog.jqueryui.com/2010/05/jquery-ui-19m1-tooltip/">Tooltip</a>. These three widgets have been in development for some time and each has had their own milestone release. For more information on these new widgetsyou can read about them on their dedicated release pages above!.We would like to invite the community to test and provide feedback on these new widgets and if you discover any bugs or issues that you need to report, instructions for doing so can be found at the <a href="http://jqueryui.com/development">jQuery UI Development Center</a>.
 <h1>jQuery Weekly Development Meetings</h1>
-<p>Beginning next week, we will be trialing the idea of a jQuery development meeting of core developers and contributors each week in the #jquery-meeting channel on freenode. Agendas for these meetings will be made available in advance and any members of the jQuery community that would like to attend are more than welcome to. Our first meeting will be held on Tuesday January 4th at 9PM ET and the topics of discussion will be the jQuery 1.5 roadmap, ticket triage and a discussion on infrastructure.</p>
-
+Beginning on January 4th 2011, we will be trialing the idea of a jQuery development meeting of core developers and contributors each week in the #jquery-meeting channel on freenode. Agendas for these meetings will be made available in advance and any members of the jQuery community that would like to attend are more than welcome to. Our first meeting will be held on Tuesday January 4th at 9PM EDT and the topics of discussion will be the jQuery 1.5 roadmap, ticket triage and a discussion on infrastructure.
 <h1>Wijmo on the jQuery Podcast</h1>
-<p>For fans of the <a href="http://podcast.jquery.com/">Official jQuery Podcast</a>, we would like to remind you that <a href="http://podcast.jquery.com/2010/12/17/episode-40-wijmo/">Episode 40</a> is now available for streaming or download. In this episode, we talk to Chris Bannon of ComponentOne about the new jQuery UI-based library called Wijmo.</p>
-
+For fans of the <a href="http://podcast.jquery.com/">Official jQuery Podcast</a>, we would like to remind you that <a href="http://podcast.jquery.com/2010/12/17/episode-40-wijmo/">Episode 40</a> is now available for streaming or download. In this episode, we talk to Chris Bannon of ComponentOne about the new jQuery UI-based library called Wijmo.
 <h1>Donations</h1>
-<p>Has jQuery helped make your development life a little easier? As you may know, jQuery is an open-source project that relies on the time and effort of our valued volunteers and community members and is financed entirely through donations from the general public. If you've found jQuery useful, we would like to humbly ask that you consider making a small contribution (even $10 goes a long way). The jQuery project is a part of the Software Freedom Conservancy, so any donation you make is fully tax-deductible. For more information on financial contribution, please visit <a href="http://jquery.org/donate">http://jquery.org/donate</a>.</p>
-<p>If you can’t donate any money, we’re always in need of talented software developers, IT professionals, and nerds of all stripes to help develop and maintain jQuery and its related properties. If you’re interested in contributing some time to help make jQuery great, please get in touch with a <a href="http://jquery.org/team">team member</a>, or ask in the #jquery channel on Freenode.</p>
-<p></p>
-<p>That's it for this update! Thanks for reading; we look forward to your feedback.</p>
-</body>
-</html>​
+Has jQuery helped make your development life a little easier? As you may know, jQuery is an open-source project that relies on the time and effort of our valued volunteers and community members and is financed entirely through donations from the general public. If you've found jQuery useful, we would like to humbly ask that you consider making a small contribution (even $10 goes a long way). The jQuery project is a part of the Software Freedom Conservancy, so any donation you make is fully tax-deductible. For more information on financial contribution, please visit <a href="http://jquery.org/donate">http://jquery.org/donate</a>.
+
+If you can’t donate any money, we’re always in need of talented software developers, IT professionals, and nerds of all stripes to help develop and maintain jQuery and its related properties. If you’re interested in contributing some time to help make jQuery great, please get in touch with a <a href="http://jquery.org/team">team member</a>, or ask in the #jquery channel on Freenode.
+
+That's it for this update! Thanks for reading; we look forward to your feedback.
