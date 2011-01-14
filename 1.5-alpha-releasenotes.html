@@ -47,5 +47,15 @@
 <li>Fixed an issue where the nth-child does not handle whitespace correctly in Internet Explorer. <a href="http://bugs.jquery.com/ticket/7558">#7558</a></li>
 <li>We corrected a bug where mouseenter/leave behaved like mouseover/out when using live events <a href="http://bugs.jquery.com/ticket/5821">#5821</a></li>
 <li>Subclassing in jQuery now supported <a href="http://bugs.jquery.com/ticket/7901">#7901</a></li>
+<li>Fixed a regression in 1.4.3 where the eq() selector was no longer working with previous and adjacent selectors <a href="http://bugs.jquery.com/ticket/7906">#7906</a></li>
+<li>Updated the documentation on event.currentTarget to address any confusion regarding jQuery.proxy. <a href="http://bugs.jquery.com/ticket/7628">#7628</a></li>
+<li>Fixed an issue where xhr.setRequestHeader('Accept',...) appended the value rather than replacing it. <a href="http://bugs.jquery.com/ticket/6230">#6230</a></li>
+<li>An IE issue where ajax methods failed for content types ending in '+xml' (eg. rss+xml) was fixed. <a href="http://bugs.jquery.com/ticket/4958">#4958</a></li>
+<li>The updates to ajax now allow any request to be aborted. <a href="http://bugs.jquery.com/ticket/3442">#3442</a></li>
+<li>A .slideUp() issue in FireFox 3.6.11 was fixed which previously hid the frameset border and legend but left any content uncovered by another element. <a href="http://bugs.jquery.com/ticket/7308">#7308</a></li>
+<li>We now support cross-browser XML parsing. <a href="http://bugs.jquery.com/ticket/6693">#6693</a></li>
+<li>Fixed a bug where when using dataType:'json' in the .ajax() method, the data object was undefined in IE6 and 7. <a href="http://bugs.jquery.com/ticket/6106">#6106</a></li>
+<li>Corrected an issue where JSONP calls were not removing the script tag when the call completed. <a href="http://bugs.jquery.com/ticket/7418">#7418</a></li>
+<li>Updated the documentation to reflect the behaviour supported when using delay() with show() if the duration is not specified. <a href="http://bugs.jquery.com/ticket/7543">#7543</a></li>
 </ul>
 
