@@ -1,0 +1,56 @@
+
+<h2>Change Log</h2>
+
+<ul>
+	<li>Rewrite of the Ajax module by Julian Aubourg. This is the most significant change in this release and brings a number of performance, stability, and feature improvements to $.ajax. More information can be found above. <a href="http://bugs.jquery.com/ticket/7195">#7195</a></li>
+	<li>Removed the possibility of expando collisions when using noConflict() (V8 is fast!). The expando string now uses a random number + jQuery version to differentiate between instances of jQuery instead of millisecond clock time. <a href="http://bugs.jquery.com/ticket/6842">#6842</a></li>
+	<li>Deduplicated code in $.get and $.post. <a href="http://bugs.jquery.com/ticket/7847">#7847</a></li>
+	<li>When a native browser event is bubbling up the DOM, make sure that the correct isDefaultPrevented value is reflected by jQuery's Event object. <a href="http://bugs.jquery.com/ticket/7793">#7793</a></li>
+	<li>No longer cache non-html strings in buildFragment to avoid possible collision with the names of Object methods like toString. Testing shows this may also provide modest performance improvements. <a href="http://bugs.jquery.com/ticket/6779">#6779</a></li>
+	<li>Updated cloneCopyEvent so that it does not create superfluous data objects when cloning elements. Exposes a new method, $.hasData, for determining whether or not an object has any data. <a href="http://bugs.jquery.com/ticket/7165">#7165</a></li>
+	<li>Use a for loop rather than for/in loop when copying events so that code will work with an augmented Array.prototype. <a href="http://bugs.jquery.com/ticket/7809">#7809</a>, <a href="http://bugs.jquery.com/ticket/7817">#7817</a></li>
+	<li>Fixed fadeIn not working properly with inline elements. <a href="http://bugs.jquery.com/ticket/7397">#7397</a></li>
+	<li>Rewrote IE's clone function to function properly in all known cases. <a href="http://bugs.jquery.com/ticket/4386">#4386</a>, <a href="http://bugs.jquery.com/ticket/5566">#5566</a>, <a href="http://bugs.jquery.com/ticket/6997">#6997</a></li>
+	<li>Fixed IE breaking when dispatching a 'submit' event on plain JS objects. <a href="http://bugs.jquery.com/ticket/6398">#6398</a></li>
+	<li>Fixed a regression in 1.4 that caused cache control to be set incorrectly for script transport. <a href="http://bugs.jquery.com/ticket/7578">#7578</a></li>
+	<li>Improve performance of get() for negative indices. <a href="http://bugs.jquery.com/ticket/5476">#5476</a></li>
+	<li>hasClass, removeClass didn't work in IE if the attribute contained a carriage return (\r) character. <a href="http://bugs.jquery.com/ticket/7673">#7673</a></li>
+	<li>Fix a regresion in 1.4.4 where calling $.fn.data without arguments breaks on non-DOM elements. <a href="http://bugs.jquery.com/ticket/7524">#7524</a></li>
+	<li>Fixed memory leaks in IE caused by the custom abort function of $.ajax. <a href="http://bugs.jquery.com/ticket/6242">#6242</a></li>
+	<li>Prevent live events from firing on disabled elements in IE. <a href="http://bugs.jquery.com/ticket/6911">#6911</a></li>
+	<li>Fixed a regression in 1.4.3 that caused sending a Location object to $.ajax to no longer work. <a href="http://bugs.jquery.com/ticket/7531">#7531</a></li>
+	<li>Fixed an issue where some traversal methods performed an unnecessary uniqueness check.  <a href="http://bugs.jquery.com/ticket/7964">#7964</a></li>
+	<li>We now support being able to specify callbacks to handle specific status codes<a href="http://bugs.jquery.com/ticket/4964">#4964</a></li>
+	<li>Fixed an issue where ?? wasn't supported as a context-insensitive placeholder for the callback name of a JSONP request. <a href="http://bugs.jquery.com/ticket/4897">#4897</a></li>
+	<li>Data returned from dataFilter was not being passed to ajax complete() callbacks. We now use the jXHR's promise interface to get the actual response. <a href="http://bugs.jquery.com/ticket/4825">#4825</a></li>
+ <li>We now ensure that buildFragment clones elements properly in all browsers. <a href="http://bugs.jquery.com/ticket/6655">#6655</a> and <a href="http://bugs.jquery.com/ticket/3879">#3879</a> </li>
+      <li>Fixed a regression where animating the width of elements failed when inline styles where initialized to a width of 0 using Opera 10.x and 11.x. <a href="http://bugs.jquery.com/ticket/6655">#7608</a></li>
+     <li>A memory leak caused when binding custom events in IE8 was fixed <a href="http://bugs.jquery.com/ticket/7054">#7054</a></li>
+     <li>Lines in form data are now delimited by CRLF when the form is submitted (as recommended by the W3C). <a href="http://bugs.jquery.com/ticket/6876">#6876</a></li>
+        <li>Ajax requests now abort on unload such that the event is only bound if the xhr transport is used. <a href="http://bugs.jquery.com/ticket/5280">#5280</a></li>
+   <li>We now support =? being detected even if it has been escaped during data serialization. <a href="http://bugs.jquery.com/ticket/5812">#5812</a></li>
+    <li>If the user uses the jsonpCallback setting we now automatically set the dataType to 'jsonp'. <a href="http://bugs.jquery.com/ticket/5803">#5803</a></li>
+    <li>The crossDomain option now forces ajax to consider a request as cross-domain, even when its not. This is useful when servers issue redirects to cross-domain urls. <a href="http://bugs.jquery.com/ticket/5955">#5955</a></li>
+   <li>$.ajax(this) allowing retries without the recursion errors found in jQuery 1.4.3. <a href="http://bugs.jquery.com/ticket/7461">#7461</a></li>
+    <li>Removed a patch for very early versions of Opera 9 that made it impossible to animate values smaller than -10000. <a href="http://bugs.jquery.com/ticket/7193">#7193</a></li>  
+     <li>ResponseText is now properly propagated for error callbacks. <a href="http://bugs.jquery.com/ticket/7868">#7868</a></li>    
+    <li>Scripts onload handler passes event as first parameter so statusText is now passed as second argument for aborts. <a href="http://bugs.jquery.com/ticket/7865">#7865</a></li> 
+     <li>With respect to xhr, setting contentType to false will now prevent the Content-Type header from being sent. <a href="http://bugs.jquery.com/ticket/7465">#7465</a></li>  
+      <li>When serializing text, we now encode all line breaks as CRLF pairs per the application/x-www-form-urlencoded specification. <a href="http://bugs.jquery.com/ticket/6876">#6876</a></li>    
+  <li>Fixed a bug with IE6 where certain event handlers were causing inter-page memory leaks. <a href="http://bugs.jquery.com/ticket/7762">#7762</a></li>
+<li>Tests for cross-domain detection now include checking for protocol, hostname and port. <a href="http://bugs.jquery.com/ticket/7465">#7465</a></li>
+</ul>
+
+
+
+
+
+
+
+ 
+  
+
+
+
+
+
